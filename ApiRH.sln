@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRH", "ApiRH\ApiRH.csproj", "{023FE9E9-40B6-4405-8FC7-8F617FEB705B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{26ED64E9-1E8E-49FE-84B4-81D3CEDAC9D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio", "{CD970859-0E5D-4A9D-9E75-0247F07CBE12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{E0150D84-769A-4D00-A667-E11518ACD7F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{023FE9E9-40B6-4405-8FC7-8F617FEB705B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023FE9E9-40B6-4405-8FC7-8F617FEB705B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023FE9E9-40B6-4405-8FC7-8F617FEB705B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023FE9E9-40B6-4405-8FC7-8F617FEB705B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{023FE9E9-40B6-4405-8FC7-8F617FEB705B} = {26ED64E9-1E8E-49FE-84B4-81D3CEDAC9D9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {159E5AD0-B63C-42FC-A4B4-6B2BF4909156}
+	EndGlobalSection
+EndGlobal
