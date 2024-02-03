@@ -1,10 +1,9 @@
 ﻿using ApiRH.Dominio.Core.Commands.Contratos;
 using Flunt.Notifications;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ApiRH.Dominio.Core.Commands;
 
-public class CommandResult<T> : NotifiableResult, ICommandResult<T>, IActionResult
+public class CommandResult<T> : NotifiableResult, ICommandResult<T>
 {
     public CommandResult(int statusCode)
     {
@@ -38,5 +37,6 @@ public class CommandResult<T> : NotifiableResult, ICommandResult<T>, IActionResu
     public int StatusCode { get; set; }
     public string Mensagem { get; set; }
     public T Data { get; set; }
+
 }
 

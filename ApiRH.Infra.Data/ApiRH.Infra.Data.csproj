@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="Flunt" Version="2.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiRH.Dominio.Core\ApiRH.Dominio.Core.csproj" />
+    <ProjectReference Include="..\ApiRH.Dominio\ApiRH.Dominio.csproj" />
   </ItemGroup>
 
 </Project>

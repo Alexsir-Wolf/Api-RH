@@ -1,4 +1,4 @@
-﻿namespace ApiRH.Dominio.Core.Data;
+﻿namespace ApiRH.Dominio.Core.Data.Entidades;
 
 public abstract class EntidadeBase<TKey> : IEntidade<TKey> where TKey : IEquatable<TKey>
 {

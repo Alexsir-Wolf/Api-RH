@@ -1,5 +1,5 @@
 ﻿using ApiRH.Dominio.Commands.Input.Tecnologias;
-using ApiRH.Dominio.Core.Data;
+using ApiRH.Dominio.Core.Data.Entidades;
 
 namespace ApiRH.Dominio.Entidades;
 

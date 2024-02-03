@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using ApiRH.Controllers.Base;
 using ApiRH.Dominio.Core.Commands;
 using ApiRH.Dominio.Contratos.Handlers;
 using ApiRH.Dominio.Commands.Input.Tecnologias;
 using ApiRH.Dominio.Commands.Output.Tecnologias;
+using ApiRH.API.Controllers.Base;
 
-namespace ApiRH.Controllers
+namespace ApiRH.API.Controllers
 {
     public class TecnologiasController : BaseController
     {
@@ -14,7 +14,7 @@ namespace ApiRH.Controllers
 
         public TecnologiasController(ITecnologiaHandler tecnologiaHandler)
         {
-            _tecnologiaHandler = tecnologiaHandler;                
+            _tecnologiaHandler = tecnologiaHandler;
         }
 
         /// <summary>

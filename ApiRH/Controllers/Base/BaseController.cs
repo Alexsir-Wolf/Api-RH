@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ApiRH.Controllers.Base;
+namespace ApiRH.API.Controllers.Base;
 
 /// <summary>
 /// 

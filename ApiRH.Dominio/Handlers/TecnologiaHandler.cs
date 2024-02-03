@@ -1,6 +1,7 @@
 ﻿using ApiRH.Dominio.Commands.Input.Tecnologias;
 using ApiRH.Dominio.Commands.Output.Tecnologias;
 using ApiRH.Dominio.Contratos.Handlers;
+using ApiRH.Dominio.Contratos.Repositorios;
 using ApiRH.Dominio.Core.Commands;
 using ApiRH.Dominio.Entidades;
 using System.Net;
@@ -42,4 +43,23 @@ public class TecnologiaHandler : ITecnologiaHandler
         }
     }
 
+    public Task<CommandResult<TecnologiaCommandResult>> AlterarTecnologia(int id, TecnologiaCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<CommandResult<object>> ExcluirTecnologia(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<CommandResult<List<TecnologiaCommandResult>>> ListarTecnologias()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<CommandResult<TecnologiaDetalheCommandResult>> ObterTecnologiaPorId(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

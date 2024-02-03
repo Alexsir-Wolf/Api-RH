@@ -15,6 +15,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ApiRH.Dominio.Core\ApiRH.Dominio.Core.csproj" />
     <ProjectReference Include="..\ApiRH.Dominio\ApiRH.Dominio.csproj" />
+    <ProjectReference Include="..\ApiRH.Infra.IoC\ApiRH.Infra.IoC.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+</PropertyGroup>
 
 </Project>
