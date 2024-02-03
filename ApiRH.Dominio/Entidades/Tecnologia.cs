@@ -20,9 +20,9 @@ public class Tecnologia : EntidadeBase<int>
     public string? Nome { get; set; }
     public string? Peso { get; set; }
 
-    public void MontaTecnologia(Tecnologia command) 
-    {
-        Nome = command.Nome;
+	public void MontaAlteracao(TecnologiaCommand command)
+	{
+		Nome = command.Nome;
         Peso = command.Peso;
-    }
+	}
 }

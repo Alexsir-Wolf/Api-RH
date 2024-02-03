@@ -42,24 +42,89 @@ public class TecnologiaHandler : ITecnologiaHandler
             throw;
         }
     }
-
-    public Task<CommandResult<TecnologiaCommandResult>> AlterarTecnologia(int id, TecnologiaCommand command)
+    public async Task<CommandResult<List<TecnologiaCommandResult>>> ListarTecnologias()
     {
-        throw new NotImplementedException();
+        try
+        {
+            var tecnologias = await _tecnologiaRepositorio.ListarAsync();
+
+            return new CommandResult<List<TecnologiaCommandResult>>(HttpStatusCode.OK.GetHashCode())
+            {
+                Data = new TecnologiaCommandResult().MontarLista(tecnologias),
+            };
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
-    public Task<CommandResult<object>> ExcluirTecnologia(int id)
+    public async Task<CommandResult<TecnologiaCommandResult>> AlterarTecnologia(int id, TecnologiaCommand command)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = new CommandResult<TecnologiaCommandResult>(HttpStatusCode.UnprocessableEntity.GetHashCode());
+            if (!command.IsValid())
+            {
+                result.AddNotificacoes(command);
+                return result;
+            }
+
+            var tecnologia = await _tecnologiaRepositorio.ObterIdAsync(Convert.ToInt32(id));
+            tecnologia.MontaAlteracao(command);
+
+            await _tecnologiaRepositorio.UpdateAsync(id, tecnologia);
+
+            return new CommandResult<TecnologiaCommandResult>(HttpStatusCode.OK.GetHashCode())
+            {
+                Data = new TecnologiaCommandResult().MontaTecnologia(tecnologia),
+                Mensagem = "Tecnologia alterada com sucesso!"
+            };
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+    public async Task<CommandResult<TecnologiaDetalheCommandResult>> ObterTecnologiaPorId(int id)
+    {
+        try
+        {
+            var tecnologia = await _tecnologiaRepositorio.ObterIdAsync(id);
+
+            if (tecnologia != null)
+            {
+                return new CommandResult<TecnologiaDetalheCommandResult>(HttpStatusCode.OK.GetHashCode())
+                {
+                    Data = new TecnologiaDetalheCommandResult().MontarTecnologia(tecnologia),
+                };
+            }
+
+            return new CommandResult<TecnologiaDetalheCommandResult>(HttpStatusCode.NotFound.GetHashCode())
+            {
+                Data = new TecnologiaDetalheCommandResult(),
+                Mensagem = "Tecnologia não encontrada!"
+            };            
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
-    public Task<CommandResult<List<TecnologiaCommandResult>>> ListarTecnologias()
+    public async Task<CommandResult<object>> ExcluirTecnologia(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<CommandResult<TecnologiaDetalheCommandResult>> ObterTecnologiaPorId(int id)
-    {
-        throw new NotImplementedException();
+        try
+        {
+            await _tecnologiaRepositorio.DeleteAsync(id);
+            return new CommandResult<object>(HttpStatusCode.OK.GetHashCode())
+            {
+                Mensagem = "Tecnologia excluída com sucesso!"
+            };
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }
