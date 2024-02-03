@@ -42,6 +42,7 @@ public class TecnologiaHandler : ITecnologiaHandler
             throw;
         }
     }
+
     public async Task<CommandResult<List<TecnologiaCommandResult>>> ListarTecnologias()
     {
         try
