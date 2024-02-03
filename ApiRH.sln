@@ -3,7 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRH", "ApiRH\ApiRH.csproj", "{023FE9E9-40B6-4405-8FC7-8F617FEB705B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRH.API", "ApiRH\ApiRH.API.csproj", "{023FE9E9-40B6-4405-8FC7-8F617FEB705B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6DA97BA3-758A-442F-B5BE-1B0A20488921} = {6DA97BA3-758A-442F-B5BE-1B0A20488921}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{26ED64E9-1E8E-49FE-84B4-81D3CEDAC9D9}"
 EndProject
