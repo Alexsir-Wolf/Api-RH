@@ -15,4 +15,5 @@ public class ApiRHDbContext : DbContext
     }
 
     public DbSet<Tecnologia> Tecnologia { get; set; } 
+    public DbSet<Candidato> Candidato { get; set; } 
 }
