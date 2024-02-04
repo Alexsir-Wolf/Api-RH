@@ -5,7 +5,6 @@ using ApiRH.Dominio.Contratos.Handlers;
 using ApiRH.Dominio.Commands.Input.Tecnologias;
 using ApiRH.Dominio.Commands.Output.Tecnologias;
 using ApiRH.API.Controllers.Base;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ApiRH.API.Controllers
 {
@@ -59,7 +58,6 @@ namespace ApiRH.API.Controllers
         /// <param name="id">Id da tecnologia a ser alterada.</param>
         /// <param name="model"></param>
         [HttpPut("{id}")]
-        [Authorize("Administrador")]
         [Produces("application/json")]
         [SwaggerResponse(200, Type = typeof(CommandResult<TecnologiaCommandResult>))]
         public async Task<CommandResult<TecnologiaCommandResult>> Editar(int id, [FromBody] TecnologiaCommand model)
@@ -105,7 +103,6 @@ namespace ApiRH.API.Controllers
         /// <response code="400">Se a tecnologia não for excluída.</response>
         /// <param name="id">Id da tecnologia a ser excluída.</param>
         [HttpDelete("{id}")]
-        [Authorize("Administrador")]
         [SwaggerResponse(200, Type = typeof(CommandResult<object>))]
         public async Task<CommandResult<object>> Excluir(int id)
         {

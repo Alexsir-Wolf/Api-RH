@@ -7,19 +7,25 @@ public class TecnologiaCommandResult
     public TecnologiaCommandResult()
     {
     }
+
+    public TecnologiaCommandResult(int? tecnologiaId)
+    {
+        TecnologiaId = tecnologiaId;
+    }
+
     public TecnologiaCommandResult(
-        int? id,
+        int? tecnologiaId,
         string? nome,
         string? peso,
         bool ativo)
     {
-        Id = id;
+        TecnologiaId = tecnologiaId;
         Nome = nome;
         Peso = peso;
         Status = ativo ? "Ativo" : "Inativo";
     }
 
-    public int? Id { get; private set; }
+    public int? TecnologiaId { get; private set; }
     public string? Nome { get; private set; }
     public string? Peso { get; private set; }
     public string? Status { get; private set; }
@@ -46,5 +52,31 @@ public class TecnologiaCommandResult
                 tec.Ativo));
         }
         return result;
+    }
+
+    public List<TecnologiaCommandResult> AdicionarTecnologias(List<EmpresaTecnologia> empresaTecnologias)
+    {
+        var tecnologias = new List<TecnologiaCommandResult>();
+
+        if (empresaTecnologias != null)
+        {
+
+            foreach (var tec in empresaTecnologias)
+            {
+                if (tec.Tecnologia == null)
+                {
+                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));
+                }
+                else 
+                {
+                    tecnologias.Add(new TecnologiaCommandResult(
+                        tec.Tecnologia.Id,
+                        tec.Tecnologia.Nome,
+                        tec.Tecnologia.Peso,
+                        tec.Tecnologia.Ativo));
+                }  
+            }
+        }
+        return tecnologias;
     }
 }
