@@ -32,8 +32,8 @@ public class EmpresaCommandResult
 
     public EmpresaCommandResult MontarEmpresa(Empresa? empresa)
     {
-        var tec = new TecnologiaCommandResult().AdicionarTecnologias(
-                    empresa.EmpresasTecnologias.ToList());
+        var tec = new TecnologiaCommandResult().AdicionarEmpresaTecnologias(
+                    empresa.EmpresaTecnologias.ToList());
 
         return new EmpresaCommandResult(
             empresa.Id,
@@ -51,8 +51,8 @@ public class EmpresaCommandResult
         {
             foreach (var empresa in empresas)
             {
-                var tec = new TecnologiaCommandResult().AdicionarTecnologias(
-                    empresa.EmpresasTecnologias.ToList());
+                var tec = new TecnologiaCommandResult().AdicionarEmpresaTecnologias(
+                    empresa.EmpresaTecnologias.ToList());
 
                 result.Add(new EmpresaCommandResult(
                     empresa.Id,

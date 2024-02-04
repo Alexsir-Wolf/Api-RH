@@ -54,19 +54,39 @@ public class TecnologiaCommandResult
         return result;
     }
 
-    public List<TecnologiaCommandResult> AdicionarTecnologias(List<EmpresaTecnologia> empresaTecnologias)
+    public List<TecnologiaCommandResult> AdicionarEmpresaTecnologias(List<EmpresaTecnologia> empresaTecnologias)
     {
         var tecnologias = new List<TecnologiaCommandResult>();
 
         if (empresaTecnologias != null)
         {
-
             foreach (var tec in empresaTecnologias)
             {
-                if (tec.Tecnologia == null)
+                if (tec.Tecnologia == null)                
+                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));                
+                else 
                 {
-                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));
-                }
+                    tecnologias.Add(new TecnologiaCommandResult(
+                        tec.Tecnologia.Id,
+                        tec.Tecnologia.Nome,
+                        tec.Tecnologia.Peso,
+                        tec.Tecnologia.Ativo));
+                }  
+            }
+        }
+        return tecnologias;
+    } 
+
+    public List<TecnologiaCommandResult> AdicionarCandidatoTecnologias(List<CandidatoTecnologia> candidatoTecnologias)
+    {
+        var tecnologias = new List<TecnologiaCommandResult>();
+
+        if (candidatoTecnologias != null)
+        {
+            foreach (var tec in candidatoTecnologias)
+            {
+                if (tec.Tecnologia == null)                
+                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));                
                 else 
                 {
                     tecnologias.Add(new TecnologiaCommandResult(

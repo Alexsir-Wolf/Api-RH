@@ -28,7 +28,7 @@ public class CandidatoHandler : ICandidatoHandler
                 return result;
             }
 
-            var candidato = new Candidato(command.Nome, command.Funcao);
+            var candidato = new Candidato().MontarCandidato(command);
             await _candidatoRepositorio.InserirAsync(candidato);
 
             return new CommandResult<CandidatoCommandResult>(HttpStatusCode.Created.GetHashCode())
@@ -47,7 +47,7 @@ public class CandidatoHandler : ICandidatoHandler
     {
         try
         {
-            var candidatos = await _candidatoRepositorio.ListarAsync();
+            var candidatos = await _candidatoRepositorio.ListarCandidatos();
 
             return new CommandResult<List<CandidatoCommandResult>>(HttpStatusCode.OK.GetHashCode())
             {
@@ -71,10 +71,10 @@ public class CandidatoHandler : ICandidatoHandler
                 return result;
             }
 
-            var candidato = await _candidatoRepositorio.ObterIdAsync(Convert.ToInt32(id));
+            var candidato = await _candidatoRepositorio.ObterCandidatoPorId(Convert.ToInt32(id));
             candidato.MontaAlteracao(command);
 
-            await _candidatoRepositorio.UpdateAsync(id, candidato);
+            await _candidatoRepositorio.AlterarCandidato(id, candidato);
 
             return new CommandResult<CandidatoCommandResult>(HttpStatusCode.OK.GetHashCode())
             {
@@ -91,7 +91,7 @@ public class CandidatoHandler : ICandidatoHandler
     {
         try
         {
-            var candidato = await _candidatoRepositorio.ObterIdAsync(id);
+            var candidato = await _candidatoRepositorio.ObterCandidatoPorId(id);
 
             if (candidato != null)
             {

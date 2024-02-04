@@ -21,7 +21,8 @@ public class Tecnologia : EntidadeBase<int>
     public string? Nome { get; set; }
     public string? Peso { get; set; }
 
-    public ICollection<EmpresaTecnologia> EmpresasTecnologias { get; set; }
+    public ICollection<EmpresaTecnologia> EmpresaTecnologias { get; set; }
+    public ICollection<CandidatoTecnologia> CandidatoTecnologias { get; set; }
 
 
     public void MontaAlteracao(TecnologiaCommand command)

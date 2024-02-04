@@ -17,14 +17,14 @@ public class Empresa : EntidadeBase<int>
     {
         Nome = nome;
         CNPJ = cnpj;
-        EmpresasTecnologias = empresaTecnologia;
+        EmpresaTecnologias = empresaTecnologia;
     }
 
     [Column("EmpresaId")]
     public override int Id { get; set; }
     public string? Nome { get; set; }
     public string? CNPJ { get; set; }
-    public ICollection<EmpresaTecnologia>? EmpresasTecnologias { get; set; }
+    public ICollection<EmpresaTecnologia>? EmpresaTecnologias { get; set; }
 
     public Empresa MontarEmpresa(EmpresaCommand command)
     {
@@ -54,6 +54,6 @@ public class Empresa : EntidadeBase<int>
 
         Nome = command.Nome;
         CNPJ = command.CNPJ;
-        EmpresasTecnologias = tecnologias;
+        EmpresaTecnologias = tecnologias;
 	}
 }

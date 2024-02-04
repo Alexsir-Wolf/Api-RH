@@ -31,8 +31,8 @@ public class EmpresaDetalheCommandResult
 
     public EmpresaDetalheCommandResult MontarEmpresa(Empresa? empresa)
     {
-        var tec = new TecnologiaCommandResult().AdicionarTecnologias(
-                   empresa.EmpresasTecnologias.ToList());
+        var tec = new TecnologiaCommandResult().AdicionarEmpresaTecnologias(
+                   empresa.EmpresaTecnologias.ToList());
 
         return new EmpresaDetalheCommandResult(
             empresa.Id,

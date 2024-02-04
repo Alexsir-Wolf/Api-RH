@@ -25,7 +25,15 @@ namespace ApiRH.API.Controllers
         ///
         ///     {
         ///        "Nome": "Candidato",
-        ///        "funcao": "Candidato"
+        ///        "funcao": "Candidato",
+        ///        "Tecnologias":[
+        ///             {
+        ///                 "TecnologiaId": 1
+        ///             },        
+        ///             {
+        ///                 "TecnologiaId": 2
+        ///             }
+        ///         ]
         ///     }
         ///
         /// </remarks>
@@ -48,7 +56,15 @@ namespace ApiRH.API.Controllers
         ///
         ///     {
         ///        "Nome": "Candidato",
-        ///        "funcao": "Candidato"
+        ///        "funcao": "Candidato",
+        ///        "Tecnologias":[
+        ///             {
+        ///                 "TecnologiaId": 1
+        ///             },        
+        ///             {
+        ///                 "TecnologiaId": 2
+        ///             }
+        ///         ]
         ///     }
         ///
         /// </remarks>

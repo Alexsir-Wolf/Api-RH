@@ -2,7 +2,6 @@
 using ApiRH.Dominio.Contratos.Repositorios;
 using ApiRH.Dominio.Entidades;
 using ApiRH.Infra.Data.Repositorios.Base;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiRH.Infra.Data.Repositorios;
@@ -22,7 +21,7 @@ public class EmpresaRepositorio : BaseRepositorio<Empresa, int>, IEmpresaReposit
         {
             var empresa = await _dbContext.Empresa
                 .AsNoTracking()
-                .Include(t => t.EmpresasTecnologias)
+                .Include(t => t.EmpresaTecnologias)
                     .ThenInclude(x => x.Tecnologia)
                     .Distinct()
                 .Where(x => x.Id == id && x.Ativo)
@@ -42,7 +41,7 @@ public class EmpresaRepositorio : BaseRepositorio<Empresa, int>, IEmpresaReposit
         {
             var empresa = await _dbContext.Empresa
                 .AsNoTracking()
-                .Include(t => t.EmpresasTecnologias)
+                .Include(t => t.EmpresaTecnologias)
                     .ThenInclude(x => x.Tecnologia)
                 .ToListAsync();
 
@@ -56,14 +55,28 @@ public class EmpresaRepositorio : BaseRepositorio<Empresa, int>, IEmpresaReposit
 
     public async Task AlterarEmpresa(int id, Empresa empresa)
     {
-        await DeletarEmpresaTecnologia(empresa.Id);
-        await base.UpdateAsync(id, empresa);
+        try
+        {
+            await DeletarEmpresaTecnologia(empresa.Id);
+            await base.UpdateAsync(id, empresa);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     private async Task DeletarEmpresaTecnologia(int id)
     {
-        var empresaTecnologia = _dbContext.EmpresaTecnologia.Where(x => x.EmpresaId == id);
-        _dbContext.EmpresaTecnologia.RemoveRange(empresaTecnologia);
-        await _dbContext.SaveChangesAsync();
+        try
+        {
+            var empresaTecnologia = _dbContext.EmpresaTecnologia.Where(x => x.EmpresaId == id);
+            _dbContext.EmpresaTecnologia.RemoveRange(empresaTecnologia);
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }
