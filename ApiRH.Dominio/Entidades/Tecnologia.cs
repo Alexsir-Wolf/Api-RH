@@ -23,6 +23,7 @@ public class Tecnologia : EntidadeBase<int>
 
     public ICollection<EmpresaTecnologia> EmpresaTecnologias { get; set; }
     public ICollection<CandidatoTecnologia> CandidatoTecnologias { get; set; }
+    public ICollection<VagaTecnologia> VagaTecnologias { get; set; }
 
 
     public void MontaAlteracao(TecnologiaCommand command)

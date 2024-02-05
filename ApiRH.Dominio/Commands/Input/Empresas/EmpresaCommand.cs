@@ -1,5 +1,4 @@
-﻿using ApiRH.Dominio.Commands.Input.Tecnologias;
-using Flunt.Notifications;
+﻿using Flunt.Notifications;
 
 namespace ApiRH.Dominio.Commands.Input.Empresas;
 

@@ -9,6 +9,11 @@ public class CandidatoCommandResult
     public CandidatoCommandResult()
     {
     }
+    public CandidatoCommandResult(int? id)
+    {
+        Id = id;
+    }
+
     public CandidatoCommandResult(
         int? id,
         string? nome,
@@ -60,5 +65,35 @@ public class CandidatoCommandResult
                 candidato.Ativo));
         }
         return result;
+    }
+
+    public List<CandidatoCommandResult> AdicionarVagaCandidatos(List<VagaCandidato> vagaCandidatos)
+    {
+        var candidatos = new List<CandidatoCommandResult>();
+        var tecnologias = new List<TecnologiaCommandResult>();
+
+        if (vagaCandidatos != null)
+        {
+            foreach (var candidato in vagaCandidatos)
+            {
+                if (candidato.Candidato == null)
+                    candidatos.Add(new CandidatoCommandResult(candidato.CandidatoId));
+                else
+                {
+                    foreach (var tec in candidato.Candidato.CandidatoTecnologias)
+                    { 
+                       
+                    }
+
+                    candidatos.Add(new CandidatoCommandResult(
+                        candidato.Candidato.Id, 
+                        candidato.Candidato.Nome, 
+                        candidato.Candidato.Funcao, 
+                        tecnologias, 
+                        candidato.Candidato.Ativo));
+                }
+            }
+        }
+        return candidatos;
     }
 }

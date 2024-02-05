@@ -98,5 +98,28 @@ public class TecnologiaCommandResult
             }
         }
         return tecnologias;
+    }    
+    
+    public List<TecnologiaCommandResult> AdicionarVagaTecnologias(List<VagaTecnologia> vagaTecnologias)
+    {
+        var tecnologias = new List<TecnologiaCommandResult>();
+
+        if (vagaTecnologias != null)
+        {
+            foreach (var tec in vagaTecnologias)
+            {
+                if (tec.Tecnologia == null)                
+                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));                
+                else 
+                {
+                    tecnologias.Add(new TecnologiaCommandResult(
+                        tec.Tecnologia.Id,
+                        tec.Tecnologia.Nome,
+                        tec.Tecnologia.Peso,
+                        tec.Tecnologia.Ativo));
+                }  
+            }
+        }
+        return tecnologias;
     }
 }

@@ -7,5 +7,5 @@ public interface ICandidatoRepositorio : IBaseRepositorio<Candidato, int>
 {
     Task<Candidato> ObterCandidatoPorId(int id);
     Task<ICollection<Candidato>> ListarCandidatos();
-    Task AlterarCandidato(int id, Candidato empresa);
+    Task AlterarCandidato(int id, Candidato candidato);
 }

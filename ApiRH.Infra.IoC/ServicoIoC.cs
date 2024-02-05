@@ -24,6 +24,7 @@ public static class ServicoIoC
         builder.Services.AddScoped<ICandidatoHandler, CandidatoHandler>();
         builder.Services.AddScoped<IEmpresaHandler, EmpresaHandler>();
         builder.Services.AddScoped<ITecnologiaHandler, TecnologiaHandler>();
+        builder.Services.AddScoped<IVagaHandler, VagaHandler>();
 
         #endregion
 
@@ -33,6 +34,7 @@ public static class ServicoIoC
         builder.Services.AddScoped<ICandidatoRepositorio, CandidatoRepositorio>();
         builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
         builder.Services.AddScoped<ITecnologiaRepositorio, TecnologiaRepositorio>();
+        builder.Services.AddScoped<IVagaRepositorio, VagaRepositorio>();
 
         #endregion
                 
