@@ -27,10 +27,12 @@ namespace ApiRH.API.Controllers
         ///        "descricao": "Vaga",
         ///        "Tecnologias":[
         ///             {
-        ///                 "TecnologiaId": 1
+        ///                 "TecnologiaId": 1,
+        ///                 "Peso":10
         ///             },        
         ///             {
-        ///                 "TecnologiaId": 2
+        ///                 "TecnologiaId": 2,
+        ///                 "Peso":10
         ///             }
         ///         ],
         ///         "Candidatos":[

@@ -1,8 +1,6 @@
 ﻿using ApiRH.Dominio.Commands.Output.Candidatos;
 using ApiRH.Dominio.Commands.Output.Tecnologias;
-using ApiRH.Dominio.Commands.Output.Vagas;
 using ApiRH.Dominio.Entidades;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ApiRH.Dominio.Commands.Output.Vagas;
 
@@ -29,7 +27,7 @@ public class VagaCommandResult
         Tecnologias = tecnologias;
         Candidatos = candidatos;
         Status = ativo ? "Ativo" : "Inativo";
-    }
+    }   
 
     public int? VagaId { get; private set; }
     public string? Descricao { get; private set; }

@@ -1,5 +1,7 @@
 ﻿using ApiRH.Dominio.Commands.Input.Tecnologias;
+using ApiRH.Dominio.Commands.Input.Vagas;
 using ApiRH.Dominio.Commands.Output.Tecnologias;
+using ApiRH.Dominio.Commands.Output.Vagas;
 using ApiRH.Dominio.Contratos.Handlers;
 using ApiRH.Dominio.Contratos.Repositorios;
 using ApiRH.Dominio.Core.Commands;
@@ -28,7 +30,7 @@ public class TecnologiaHandler : ITecnologiaHandler
                 return result;
             }
 
-            var tecnologia = new Tecnologia(command.Nome, command.Peso);
+            var tecnologia = new Tecnologia(command.Nome);
             await _tecnologiaRepositorio.InserirAsync(tecnologia);
 
             return new CommandResult<TecnologiaCommandResult>(HttpStatusCode.Created.GetHashCode())
@@ -79,6 +81,34 @@ public class TecnologiaHandler : ITecnologiaHandler
             return new CommandResult<TecnologiaCommandResult>(HttpStatusCode.OK.GetHashCode())
             {
                 Data = new TecnologiaCommandResult().MontaTecnologia(tecnologia),
+                Mensagem = "Tecnologia alterada com sucesso!"
+            };
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }   
+    
+    public async Task<CommandResult<VagaTecnologiaCommandResult>> AlterarVagaTecnologia(int id, VagaTecnologiaCommand command)
+    {
+        try
+        {
+            var result = new CommandResult<VagaTecnologiaCommandResult>(HttpStatusCode.UnprocessableEntity.GetHashCode());
+            if (!command.IsValid())
+            {
+                result.AddNotificacoes(command);
+                return result;
+            }
+
+            var tecnologia = await _tecnologiaRepositorio.ObterIdAsync(Convert.ToInt32(id));
+            tecnologia.MontaAlteracaoVagaTecnologia(command);
+
+            await _tecnologiaRepositorio.UpdateAsync(id, tecnologia);
+
+            return new CommandResult<VagaTecnologiaCommandResult>(HttpStatusCode.OK.GetHashCode())
+            {
+                Data = new VagaTecnologiaCommandResult().MontaVagaTecnologia(tecnologia),
                 Mensagem = "Tecnologia alterada com sucesso!"
             };
         }

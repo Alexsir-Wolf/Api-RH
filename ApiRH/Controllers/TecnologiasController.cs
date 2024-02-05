@@ -24,8 +24,7 @@ namespace ApiRH.API.Controllers
         /// Exemplo:
         ///
         ///     {
-        ///        "Nome": "RH",
-        ///        "peso": "RH"
+        ///        "Nome": "RH"
         ///     }
         ///
         /// </remarks>
@@ -47,8 +46,7 @@ namespace ApiRH.API.Controllers
         /// Exemplo:
         ///
         ///     {
-        ///        "Nome": "RH",
-        ///        "peso": "RH"
+        ///        "Nome": "RH"
         ///     }
         ///
         /// </remarks>

@@ -18,22 +18,36 @@ public class Vaga : EntidadeBase<int>
         Descricao = descricao;
         VagaTecnologias = tecnologias;
         VagaCandidatos = candidatos;
+    }   
+    
+    public Vaga(
+        string? descricao, 
+        ICollection<VagaTecnologia>? vagaTecnologias, 
+        ICollection<Tecnologia>? tecnologias, 
+        ICollection<VagaCandidato>? candidatos)
+    {
+        Descricao = descricao;
+        VagaTecnologias = vagaTecnologias;
+        Tecnologias = tecnologias;
+        VagaCandidatos = candidatos;
     }
 
     [Column("VagaId")]
     public override int Id { get; set; }
     public string? Descricao { get; set; }
+
     public ICollection<VagaTecnologia>? VagaTecnologias { get; set; }
     public ICollection<VagaCandidato>? VagaCandidatos { get; set; }
+    public ICollection<Tecnologia>? Tecnologias { get; set; }
 
     public Vaga MontarVaga(VagaCommand command)
     {
-        var tecnologias = new List<VagaTecnologia>();
+        var vagaTecnologias = new List<VagaTecnologia>();
         var candidatos = new List<VagaCandidato>();
 
         if (command.Tecnologias != null)        
-            foreach (var tec in command.Tecnologias)            
-                tecnologias.Add(new VagaTecnologia(tec.TecnologiaId));
+            foreach (var tec in command.Tecnologias)
+                vagaTecnologias.Add(new VagaTecnologia(tec.TecnologiaId));
 
         if (command.Candidatos != null)        
             foreach (var candidato in command.Candidatos)           
@@ -41,7 +55,7 @@ public class Vaga : EntidadeBase<int>
 
         return new Vaga(
             command.Descricao,
-            tecnologias,
+            vagaTecnologias,            
             candidatos);
     }
 

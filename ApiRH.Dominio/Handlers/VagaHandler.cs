@@ -1,4 +1,5 @@
 ﻿using ApiRH.Dominio.Commands.Input.Vagas;
+using ApiRH.Dominio.Commands.Output.Tecnologias;
 using ApiRH.Dominio.Commands.Output.Vagas;
 using ApiRH.Dominio.Contratos.Handlers;
 using ApiRH.Dominio.Contratos.Repositorios;
@@ -11,9 +12,12 @@ namespace ApiRH.Dominio.Handlers;
 public class VagaHandler : IVagaHandler
 {
     private readonly IVagaRepositorio _vagaRepositorio;
-    public VagaHandler(IVagaRepositorio vagaRepositorio)
+    private readonly ITecnologiaHandler _tecnologiaHandler;
+    public VagaHandler(IVagaRepositorio vagaRepositorio, 
+        ITecnologiaHandler tecnologiaHandler)
     {
         _vagaRepositorio = vagaRepositorio;
+        _tecnologiaHandler = tecnologiaHandler;
     }
 
     public async Task<CommandResult<VagaCommandResult>> RegistrarVaga(VagaCommand command) 
@@ -28,8 +32,12 @@ public class VagaHandler : IVagaHandler
                 return result;
             }
 
+            if (command.Tecnologias != null)            
+            foreach (var tec in command.Tecnologias)                
+                await _tecnologiaHandler.AlterarVagaTecnologia(Convert.ToInt32(tec.TecnologiaId), tec);
+
             var vaga = new Vaga().MontarVaga(command);
-            await _vagaRepositorio.InserirAsync(vaga);
+            await _vagaRepositorio.InserirAsync(vaga);  
 
             return new CommandResult<VagaCommandResult>(HttpStatusCode.Created.GetHashCode())
             {

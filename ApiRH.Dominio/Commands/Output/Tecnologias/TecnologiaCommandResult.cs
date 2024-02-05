@@ -16,7 +16,17 @@ public class TecnologiaCommandResult
     public TecnologiaCommandResult(
         int? tecnologiaId,
         string? nome,
-        string? peso,
+        bool ativo)
+    {
+        TecnologiaId = tecnologiaId;
+        Nome = nome;
+        Status = ativo ? "Ativo" : "Inativo";
+    }  
+    
+    public TecnologiaCommandResult(
+        int? tecnologiaId,
+        string? nome,
+        int? peso,
         bool ativo)
     {
         TecnologiaId = tecnologiaId;
@@ -27,7 +37,7 @@ public class TecnologiaCommandResult
 
     public int? TecnologiaId { get; private set; }
     public string? Nome { get; private set; }
-    public string? Peso { get; private set; }
+    public int? Peso { get; private set; }
     public string? Status { get; private set; }
 
     public TecnologiaCommandResult MontaTecnologia(Tecnologia? command)
@@ -35,7 +45,7 @@ public class TecnologiaCommandResult
         return new TecnologiaCommandResult(
             command.Id,
             command.Nome, 
-            command.Peso, 
+            command.Peso,
             command.Ativo);
     }
 
@@ -48,7 +58,6 @@ public class TecnologiaCommandResult
             result.Add(new TecnologiaCommandResult(
                 tec.Id,
                 tec.Nome,
-                tec.Peso,
                 tec.Ativo));
         }
         return result;

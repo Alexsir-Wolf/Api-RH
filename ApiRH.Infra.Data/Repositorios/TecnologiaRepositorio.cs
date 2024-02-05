@@ -2,6 +2,7 @@
 using ApiRH.Dominio.Contratos.Repositorios;
 using ApiRH.Dominio.Entidades;
 using ApiRH.Infra.Data.Repositorios.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiRH.Infra.Data.Repositorios;
 
