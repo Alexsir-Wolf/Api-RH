@@ -76,7 +76,11 @@ public class VagaRepositorio : BaseRepositorio<Vaga, int>, IVagaRepositorio
         try
         {
             var vagaTecnologia = _dbContext.VagaTecnologia.Where(x => x.VagaId == id);
+            var vagaCandidato = _dbContext.VagaCandidato.Where(x => x.VagaId == id);
+
             _dbContext.VagaTecnologia.RemoveRange(vagaTecnologia);
+            _dbContext.VagaCandidato.RemoveRange(vagaCandidato);
+
             await _dbContext.SaveChangesAsync();
         }
         catch (Exception)

@@ -97,7 +97,7 @@ public class VagaHandler : IVagaHandler
             {
                 return new CommandResult<VagaDetalheCommandResult>(HttpStatusCode.OK.GetHashCode())
                 {
-                    //Data = new VagaDetalheCommandResult().MontarVaga(vaga),
+                    Data = new VagaDetalheCommandResult().MontaVaga(vaga),
                 };
             }
 
