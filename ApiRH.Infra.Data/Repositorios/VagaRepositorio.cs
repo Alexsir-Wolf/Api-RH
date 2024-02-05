@@ -48,6 +48,8 @@ public class VagaRepositorio : BaseRepositorio<Vaga, int>, IVagaRepositorio
                     .ThenInclude(x => x.Tecnologia)
                 .Include(vc => vc.VagaCandidatos)
                     .ThenInclude(c => c.Candidato)
+                    .ThenInclude(ct => ct.CandidatoTecnologias)
+                    .ThenInclude(tc => tc.Tecnologia)
                 .ToListAsync();
 
             return vagas;

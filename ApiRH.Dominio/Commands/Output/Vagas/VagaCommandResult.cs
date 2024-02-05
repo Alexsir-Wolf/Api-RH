@@ -26,6 +26,8 @@ public class VagaCommandResult
     {
         VagaId = vagaId;
         Descricao = descricao;
+        Tecnologias = tecnologias;
+        Candidatos = candidatos;
         Status = ativo ? "Ativo" : "Inativo";
     }
 
@@ -38,16 +40,27 @@ public class VagaCommandResult
 
     public VagaCommandResult MontaVaga(Vaga? command)
     {
-        var tec = new TecnologiaCommandResult().AdicionarVagaTecnologias(
-            command.VagaTecnologias.ToList());    
+        var tecnologias = new List<TecnologiaCommandResult>();
+        var candidatos = new List<CandidatoCommandResult>();
+
+        if (command.VagaTecnologias != null)
+            foreach (var tec in command.VagaTecnologias)
+                if (tec.Tecnologia != null)
+                    tecnologias.Add(new TecnologiaCommandResult().MontaTecnologia(tec.Tecnologia));             
+                else
+                    tecnologias.Add(new TecnologiaCommandResult(tec.TecnologiaId));             
         
-        var candidatos = new CandidatoCommandResult().AdicionarVagaCandidatos(
-            command.VagaCandidatos.ToList());
+        if (command.VagaCandidatos != null)
+            foreach (var candidato in command.VagaCandidatos)
+                if (candidato.Candidato != null)
+                    candidatos.Add(new CandidatoCommandResult().MontaCandidato(candidato.Candidato));
+                else
+                    candidatos.Add(new CandidatoCommandResult(candidato.CandidatoId));
 
         return new VagaCommandResult(
             command.Id,
             command.Descricao,
-            tec,
+            tecnologias,
             candidatos,
             command.Ativo);
     }
@@ -56,21 +69,9 @@ public class VagaCommandResult
     {
         var result = new List<VagaCommandResult>();
 
-        foreach (var vaga in vagas)
-        {
-            var tec = new TecnologiaCommandResult().AdicionarVagaTecnologias(
-                vaga.VagaTecnologias.ToList());
+        foreach (var vaga in vagas)        
+            result.Add(new VagaCommandResult().MontaVaga(vaga));       
 
-            var candidatos = new CandidatoCommandResult().AdicionarVagaCandidatos(
-                vaga.VagaCandidatos.ToList());
-
-            result.Add(new VagaCommandResult(
-                vaga.Id,
-                vaga.Descricao,
-                tec,
-                candidatos,
-                vaga.Ativo));
-        }
         return result;
     }
 }

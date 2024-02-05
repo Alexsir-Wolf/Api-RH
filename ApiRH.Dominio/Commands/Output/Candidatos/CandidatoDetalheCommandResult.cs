@@ -11,20 +11,20 @@ public class CandidatoDetalheCommandResult
     }
 
     public CandidatoDetalheCommandResult(
-        int? id,
+        int? candidatoId,
         string? nome,
         string? funcao,
         ICollection<TecnologiaDetalheCommandResult> tecnologias,
         bool ativo)
     {
-        Id = id;
+        CandidatoId = candidatoId;
         Nome = nome;
         Funcao = funcao;
         Tecnologias = tecnologias;
         Status = ativo ? "Ativo" : "Inativo";
     }
 
-    public int? Id { get; private set; }
+    public int? CandidatoId { get; private set; }
     public string? Nome { get; private set; }
     public string? Funcao { get; private set; }
     public string? Status { get; private set; }
@@ -33,14 +33,17 @@ public class CandidatoDetalheCommandResult
 
     public CandidatoDetalheCommandResult MontarCandidato(Candidato candidato)
     {
-        var tec = new TecnologiaDetalheCommandResult().AdicionarCandidatoTecnologias(
-           candidato.CandidatoTecnologias.ToList());
+        var tecnologias = new List<TecnologiaDetalheCommandResult>();
+
+        if (candidato.CandidatoTecnologias != null)
+            foreach (var tec in candidato.CandidatoTecnologias)
+                tecnologias.Add(new TecnologiaDetalheCommandResult().MontarTecnologia(tec.Tecnologia));
 
         return new CandidatoDetalheCommandResult(
             candidato.Id,
             candidato.Nome,
             candidato.Funcao,
-            tec,
+            tecnologias,
             candidato.Ativo);
     }
 }

@@ -10,20 +10,20 @@ public class EmpresaDetalheCommandResult
     }
 
     public EmpresaDetalheCommandResult(
-        int? id,
+        int? empresaId,
         string? nome,
         string? cnpj,
-        bool ativo,
-        List<TecnologiaCommandResult>? tecnologias)
+        ICollection<TecnologiaCommandResult>? tecnologias,
+        bool ativo)
     {
-        Id = id;
+        EmpresaId = empresaId;
         Nome = nome;
         CNPJ = cnpj;
-        Status = ativo ? "Ativo" : "Inativo";
         Tecnologias = tecnologias;
+        Status = ativo ? "Ativo" : "Inativo";
     }
 
-    public int? Id { get; private set; }
+    public int? EmpresaId { get; private set; }
     public string? Nome { get; private set; }
     public string? CNPJ { get; private set; }
     public string? Status { get; private set; }
@@ -31,14 +31,17 @@ public class EmpresaDetalheCommandResult
 
     public EmpresaDetalheCommandResult MontarEmpresa(Empresa? empresa)
     {
-        var tec = new TecnologiaCommandResult().AdicionarEmpresaTecnologias(
-                   empresa.EmpresaTecnologias.ToList());
+        var tecnologias = new List<TecnologiaCommandResult>();
+
+        if (empresa.EmpresaTecnologias != null)
+            foreach (var tec in empresa.EmpresaTecnologias)
+                tecnologias.Add(new TecnologiaCommandResult().MontaTecnologia(tec.Tecnologia));
 
         return new EmpresaDetalheCommandResult(
             empresa.Id,
             empresa.Nome,
             empresa.CNPJ,
-            empresa.Ativo,
-            tec);
+            tecnologias,
+            empresa.Ativo);
     }
 }
