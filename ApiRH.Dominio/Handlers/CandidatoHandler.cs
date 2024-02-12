@@ -11,9 +11,11 @@ namespace ApiRH.Dominio.Handlers;
 public class CandidatoHandler : ICandidatoHandler
 {
     private readonly ICandidatoRepositorio _candidatoRepositorio;
-    public CandidatoHandler(ICandidatoRepositorio candidatoRepositorio)
+    private readonly IVagaRepositorio _vagaRepositorio;
+    public CandidatoHandler(ICandidatoRepositorio candidatoRepositorio, IVagaRepositorio vagaRepositorio)
     {
         _candidatoRepositorio = candidatoRepositorio;
+        _vagaRepositorio = vagaRepositorio;
     }
 
     public async Task<CommandResult<CandidatoCommandResult>> RegistrarCandidato(CandidatoCommand command) 
@@ -52,6 +54,32 @@ public class CandidatoHandler : ICandidatoHandler
             return new CommandResult<List<CandidatoCommandResult>>(HttpStatusCode.OK.GetHashCode())
             {
                 Data = new CandidatoCommandResult().MontarLista(candidatos),
+            };
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }    
+    
+    public async Task<CommandResult<List<CandidatoCommandResult>>> ListarCandidatosPorVaga(int id)
+    {
+        try
+        {
+            //Obter candidatos
+            var candidatos = await _candidatoRepositorio.ListarCandidatosPorVaga(id);
+
+            foreach (var item in candidatos)
+            {
+                var peso = item.CandidatoTecnologias.Select(x => x.Tecnologia).Sum(x => x.Peso);
+                item.PesoTecnologiaVaga = peso;
+            }
+
+  
+
+            return new CommandResult<List<CandidatoCommandResult>>(HttpStatusCode.OK.GetHashCode())
+            {
+                Data = new CandidatoCommandResult().MontarListaPorPeso(candidatos)
             };
         }
         catch (Exception)

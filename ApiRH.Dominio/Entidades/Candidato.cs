@@ -26,7 +26,12 @@ public class Candidato : EntidadeBase<int>
     public string? Funcao { get; set; }
 
     public ICollection<CandidatoTecnologia>? CandidatoTecnologias { get; set; }
+
     public ICollection<VagaCandidato>? VagaCandidatos { get; set; }
+
+    [NotMapped]
+    public int? PesoTecnologiaVaga { get; set; }
+
 
     public Candidato MontarCandidato(CandidatoCommand command)
     {

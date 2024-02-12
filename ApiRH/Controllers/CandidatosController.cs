@@ -97,6 +97,22 @@ namespace ApiRH.API.Controllers
         }
 
         /// <summary>
+        /// Lista todos os candidatos por vaga.
+        /// </summary>
+        /// <remarks />
+        /// <returns>Lista todos os candidatos por vaga cadastrados e ativos.</returns>
+        /// <response code="200">Retorna lista de candidatos por vaga.</response>
+        /// <response code="400">Se ocorrer algum erro ao listar os candidatos.</response>    
+        /// <param name="id">Id da vaga a ser consultada.</param>
+        [HttpGet("por-vaga/{id}")]
+        [Produces("application/json")]
+        [SwaggerResponse(200, Type = typeof(CommandResult<List<CandidatoCommandResult>>))]
+        public async Task<CommandResult<List<CandidatoCommandResult>>> ListarPorVaga(int id)
+        {
+            return await _candidatoHandler.ListarCandidatosPorVaga(id);
+        }
+
+        /// <summary>
         /// Obtem um candidato por id.
         /// </summary>
         /// <returns></returns>

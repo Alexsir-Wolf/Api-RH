@@ -51,6 +51,27 @@ public class CandidatoRepositorio : BaseRepositorio<Candidato, int>, ICandidatoR
         {
             throw ex;
         }
+    }  
+    
+    public async Task<ICollection<Candidato>> ListarCandidatosPorVaga(int id)
+    {
+        try
+        {
+            var candidatos = await _dbContext.Candidato
+                .AsNoTracking()
+                .Include(ct => ct.CandidatoTecnologias)
+                    .ThenInclude(t => t.Tecnologia)
+                .Include(vc => vc.VagaCandidatos)
+                    .ThenInclude(t => t.Vaga)
+                .Where(vc => vc.VagaCandidatos.FirstOrDefault().VagaId == id) // Filtra os registros de VagaCandidatos pela ID da vaga
+                .ToListAsync();
+
+            return candidatos;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
     public async Task AlterarCandidato(int id, Candidato candidato)
